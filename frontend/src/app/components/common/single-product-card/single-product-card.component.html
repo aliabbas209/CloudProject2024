@@ -3,7 +3,7 @@
   class="card h-100 shadow-sm border"
   [ngClass]="{
   'border-danger': !product.stock,
-  'border-success': product.stock,
+  'bsuccess': product.stock,
   'text-danger': !product.stock,
 }"
 >
@@ -33,6 +33,12 @@
       >
     </p>
     <button
+      [routerLink]="['/product', product.productId]"
+      class="btn btn-light my-2"
+    >
+      View
+    </button>
+    <button
       (click)="addToCartRequest(product)"
       class="btn"
       [ngClass]="{
@@ -42,11 +48,6 @@
     >
       {{ !product.stock ? "Out of Stock" : " Add to Cart" }}
     </button>
-    <button
-      [routerLink]="['/product', product.productId]"
-      class="btn btn-warning my-2"
-    >
-      View
-    </button>
+    
   </div>
 </div>

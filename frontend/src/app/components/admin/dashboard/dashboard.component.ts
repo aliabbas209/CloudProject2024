@@ -14,7 +14,7 @@ export class DashboardComponent {
       cssClass: '',
     },
     {
-      title: 'Add Producs',
+      title: 'Add Products',
       link: '/admin/add-product',
       icon: 'circle-plus',
       cssClass: '',

@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-light sticky-top" data-bs-theme="light">
   <div class="container">
     <a class="navbar-brand" href="/home" [routerLink]="'/home'"
-      >Electronic Store</a
+      ><img width="30" src="../../../../assets/images/icons8-store-48.png" alt="" > WebShop</a
     >
 
     <button
@@ -21,7 +21,7 @@
       [class.collapse]="collapse"
       id="navbarSupportedContent"
     >
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a
             class="nav-link"
@@ -32,53 +32,7 @@
             >Home</a
           >
         </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLinkActive="active"
-            aria-current="page"
-            [routerLink]="['/store']"
-            >Store</a
-          >
-        </li>
-
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLinkActive="active"
-            href="#"
-            [routerLink]="['/categories']"
-            >Categories</a
-          >
-        </li>
-        <!--
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li> -->
-
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLinkActive="active"
-            href="/features"
-            routerLink="/features"
-            >Features</a
-          >
-        </li>
+       
 
         <li class="nav-item">
           <a
@@ -94,7 +48,9 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="#!" [routerLink]="['/cart']"
-            >Cart
+            ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+            </svg> Cart
 
             <span *ngIf="cart?.cartId">( {{ cart?.items?.length }} )</span>
           </a>
