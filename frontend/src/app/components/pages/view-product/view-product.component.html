@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="card" *ngIf="product">
+    <div class="card-body">
+      <h3 class="">{{ product.title }}</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente,
+        quisquam! Quam doloribus nostrum harum nobis repellendus minus repellat
+        aut voluptates. Fugit pariatur consectetur, ut odit perspiciatis ducimus
+        sit nisi est voluptate omnis facere qui et voluptatibus debitis dolorem,
+        quod repudiandae doloribus labore. Laboriosam amet ad culpa vel atque
+        laborum dolorum.
+      </p>
+
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="image-container text-center py-4">
+            <img
+              onerror="this.src='https://www.automation-expo.asia/wp-content/plugins/ecommerce-product-catalog/img/no-default-thumbnail.png'"
+              [src]="_productService.getProductImageUrl(product.productId)"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Category</td>
+                  <td class="fw-bold">
+                    {{ product.title }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Category</td>
+                  <td class="fw-bold">
+                    {{ product.category.title }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Stock</td>
+                  <td class="fw-bold">
+                    <span
+                      class="badge"
+                      [ngClass]="{
+                        'text-bg-primary': product.stock,
+                        'text-bg-danger': !product.stock,
+                      }"
+                    >
+                      {{ product.stock ? "In Stock" : "Out of Stock" }}
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="fs-2">Price</td>
+                  <td class="fs-2">
+                    <span class="text-decoration-line-through text-muted">
+                      €{{ product.price }}
+                    </span>
+                    <span class="fw-bold text-success">
+                      €{{ product.discountedPrice }}</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="text-center">
+                    <button
+                      (click)="addToCartRequest(product)"
+                      class="btn"
+                      [ngClass]="{
+                        'btn-primary': product.stock,
+                        'btn-danger': !product.stock
+                      }"
+                    >
+                      {{ !product.stock ? "Out of Stock" : " Add to Card" }}
+                    </button>
+
+                    <button routerLink="/store" class="btn btn-secondary ms-2">
+                      Back to Store
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="my-3">
+        <p [innerHTML]="product.description"></p>
+        <div class="container text-center">
+          <button
+            (click)="addToCartRequest(product)"
+            class="btn"
+            [ngClass]="{
+              'btn-primary': product.stock,
+              'btn-danger': !product.stock
+            }"
+          >
+            {{ !product.stock ? "Out of Stock" : " Add to Card" }}
+          </button>
+
+          <button routerLink="/store" class="btn btn-secondary ms-2">
+            Back to Store
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

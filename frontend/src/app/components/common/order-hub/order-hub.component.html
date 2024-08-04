@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <div class="card" *ngIf="orderResponse">
+      <div class="card-body">
+        <h3>All Orders ( {{ orderResponse.content.length }} )</h3>
+        <div class="list-group">
+          <div
+            *ngFor="let order of orderResponse.content"
+            class="list-group-item shadow-sm mt-4 list-group-item-action"
+            style="cursor: pointer"
+            (click)="openModal(order)"
+          >
+            <div class="row">
+              <div class="col-md-8">
+                <p>
+                  ORER ID : <span class="fw-bold">{{ order.orderId }}</span>
+                </p>
+              </div>
+              <div class="col-md-4">
+                <p>
+                  ORERED DATE :
+                  <span class="fw-bold">{{
+                    order.orderedDate | date : "dd-MM-yyyy"
+                  }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <p>
+                  ORDER STATUS :
+                  <span
+                    class="fw-bold badge"
+                    [ngClass]="{
+                      'text-bg-success':
+                        order.orderStatus === orderStatus.DELIVERED,
+                      'text-bg-primary':
+                        order.orderStatus !== orderStatus.DELIVERED
+                    }"
+                    >{{ order.orderStatus }}</span
+                  >
+                </p>
+              </div>
+              <div class="col-md-4">
+                <p>
+                  PAYEMENT STATUS :
+                  <span
+                    class="fw-bold badge"
+                    [ngClass]="{
+                      'text-bg-danger':
+                        order.paymentStatus != paymentStatus.PAID,
+                      'text-bg-success':
+                        order.paymentStatus == paymentStatus.PAID,
+                     
+                       
+                    }"
+                  >
+                    {{ order.paymentStatus }}
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <p>
+                  USER NAME : <span class="fw-bold">{{ order.user.name }}</span>
+                </p>
+              </div>
+              <div class="col-md-4">
+                <p>
+                  BILLING NAME :
+                  <span class="fw-bold"
+                    >{{ order.billingName | uppercase }}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-order-view-modal></app-order-view-modal>

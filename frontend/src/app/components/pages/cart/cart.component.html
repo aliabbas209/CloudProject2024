@@ -1,0 +1,99 @@
+<div class="container-fuild">
+  <div class="row">
+    <div class="col-md-8 gs-x-0 offset-md-2">
+      <div class="card shadow-sm">
+        <div class="card-body" *ngIf="cart">
+          <h3>Cart Items ({{ cart.items.length }})</h3>
+          <div class="mt-4 container-fluid">
+            <app-cart-item
+              [cartItem]="item"
+              *ngFor="let item of cart.items"
+              (itemIncreaseQuantityEvent)="increaseQuantity($event)"
+              (itemDecreaseQuantityEvent)="decreaseQuantity($event)"
+              (itemDeleteEvent)="deleteItem($event)"
+            ></app-cart-item>
+          </div>
+          <div class="mt-3 text-center" *ngIf="cart.items.length > 0">
+            <h3 class="text-center mb-2">
+              Total Price : €{{ _cart.getTotalPriceOfCart(cart.items) }}
+            </h3>
+
+            <button
+              class="btn btn-success btn-lg"
+              (click)="openOrderPlaceModel(orderContent)"
+            >
+              Place Order
+            </button>
+            <button (click)="clearCart()" class="btn btn-danger btn-lg ms-2">
+              Clear Cart
+            </button>
+          </div>
+          <div *ngIf="cart.items.length <= 0">
+            <div class="alert alert-danger text-center">
+              <h3>No Items in cart</h3>
+              <button routerLink="/store" class="btn btn-primary">
+                Add Items to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- order modal -->
+
+<ng-template #orderContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Fill order detail</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="createOrderFormSubmitted($event)">
+      <div class="my-2">
+        <label for="billingName">Billing Name</label>
+        <input
+          type="text"
+          name="billingName"
+          id="billingName"
+          class="form-control"
+          [(ngModel)]="orderRequest.billingName"
+          placeholder="Enter here"
+        />
+      </div>
+      <div class="my-2">
+        <label for="billingPhone">Billing Phone</label>
+        <input
+          type="text"
+          name="billingPhone"
+          id="billingPhone"
+          class="form-control"
+          [(ngModel)]="orderRequest.billingPhone"
+          placeholder="Enter here"
+        />
+      </div>
+      <div class="my-2">
+        <label for="billingAddress">Billing Address</label>
+        <textarea
+          name="billingAddress"
+          id="billingAddress"
+          class="form-control"
+          [(ngModel)]="orderRequest.billingAddress"
+          placeholder="Enter here"
+          rows="6"
+        ></textarea>
+      </div>
+      <div class="container text-center my-3">
+        <button type="submit" class="btn btn-primary btn-lg">
+          Create Order
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>

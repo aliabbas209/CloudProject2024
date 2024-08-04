@@ -1,0 +1,52 @@
+<div
+  *ngIf="product"
+  class="card h-100 shadow-sm border"
+  [ngClass]="{
+  'border-danger': !product.stock,
+  'border-success': product.stock,
+  'text-danger': !product.stock,
+}"
+>
+  <div class="card-body">
+    <div class="image-container text-center">
+      <img
+        [src]="productService.getProductImageUrl(product.productId)"
+        [alt]="product.title"
+      />
+    </div>
+    <h5 class="mt-3">{{ product.title }}</h5>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate soluta,
+      cum aliquid animi nostrum voluptatum?
+    </p>
+  </div>
+  <div class="px-3 row">
+    <!-- price  and discounted price -->
+
+    <p class="fs-4">
+      Price:
+      <span class="fw-bold text-muted text-decoration-line-through"
+        >€{{ product.price }}</span
+      >
+      <span class="fw-bolder text-success">
+        €{{ product.discountedPrice }}</span
+      >
+    </p>
+    <button
+      (click)="addToCartRequest(product)"
+      class="btn"
+      [ngClass]="{
+        'btn-primary': product.stock,
+        'btn-danger': !product.stock
+      }"
+    >
+      {{ !product.stock ? "Out of Stock" : " Add to Cart" }}
+    </button>
+    <button
+      [routerLink]="['/product', product.productId]"
+      class="btn btn-warning my-2"
+    >
+      View
+    </button>
+  </div>
+</div>

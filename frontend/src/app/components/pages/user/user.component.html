@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <app-user-view [user]="user"></app-user-view>
+      <div class="row mx-1 my-2" *ngIf="user">
+        <button
+          (click)="openUpdateModal(updateContent)"
+          class="btn btn-outline-primary"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #updateContent let-modal>
+  <div class="modal-header">
+    {{ user?.name | uppercase }}
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body" *ngIf="user">
+    <!-- {{ user | json }} -->
+    <div class="container mt-1">
+      <h2>User Update Form</h2>
+      <form (ngSubmit)="updateFormSubmitted($event)">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="name"
+            class="form-control"
+            required
+            [(ngModel)]="user.name"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="gender" class="form-label">Gender:</label>
+          <select
+            id="gender"
+            name="gender"
+            class="form-select"
+            [(ngModel)]="user.gender"
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="about" class="form-label">About:</label>
+          <textarea
+            id="about"
+            name="about"
+            rows="4"
+            class="form-control"
+            [(ngModel)]="user.about"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            required
+            [(ngModel)]="user.password"
+          />
+        </div>
+        <div class="mb-3">
+          <div class="preview-container text-center">
+            <img
+              [src]="previewImageUrl"
+              style="height: 250px; width: auto"
+              alt=""
+            />
+          </div>
+
+          <label for="image" class="form-label">Image:</label>
+          <input
+            type="file"
+            (change)="imageFieldChanged($event)"
+            id="image"
+            name="image"
+            class="form-control"
+          />
+        </div>
+        <div class="container text-center">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,56 @@
+<div class="container-fluid mt-5">
+  <div class="card shadow-sm border">
+    <div class="card-body">
+      <div class="container text-center">
+        <i-tabler class="custom-icon-size" [name]="'file-diff'"></i-tabler>
+        <h3 class="text-center">Add Category</h3>
+      </div>
+      <form id="categoryForm" (ngSubmit)="formSubmitted($event)">
+        <div class="form-group mb-2">
+          <label for="categoryTitle">Category Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="categoryTitle"
+            required
+            [(ngModel)]="category.title"
+            name="title"
+            autofocus
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label for="categoryDescription">Description</label>
+          <textarea
+            class="form-control"
+            id="categoryDescription"
+            name="description"
+            rows="4"
+            required
+            [(ngModel)]="category.description"
+          ></textarea>
+        </div>
+        <div class="form-group mb-2">
+          <label for="coverImage">Cover Image URL</label>
+          <input
+            type="text"
+            class="form-control"
+            id="coverImage"
+            name="coverImage"
+            [(ngModel)]="category.coverImage"
+            required
+          />
+        </div>
+        <div class="container text-center">
+          <button type="submit" class="btn btn-primary btn-sm">
+            Add Category
+          </button>
+          <button type="reset" class="btn btn-secondary ms-2 btn-sm">
+            Reset Form
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- {{ category | json }} -->

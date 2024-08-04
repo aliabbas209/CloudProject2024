@@ -1,0 +1,157 @@
+<!-- {{ product | json }} -->
+
+<div class="card border shadow-sm mt-4 mb-5">
+  <div class="card-body">
+    <div class="text-center">
+      <i-tabler class="custom-icon-size" [name]="'circle-plus'"></i-tabler>
+      <h2>Add Product</h2>
+    </div>
+    <form (ngSubmit)="formSubmitted($event)">
+      <!-- title field  -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Title:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          required
+          [(ngModel)]="product.title"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <!-- <textarea
+          class="form-control"
+          id="description"
+          name="description"
+          rows="4"
+          required
+          [(ngModel)]="product.description"
+        ></textarea> -->
+        <quill-editor
+          [style]="{ height: '300px', width: '100%' }"
+          [placeholder]="'Enter text...'"
+          [(ngModel)]="product.description"
+          name="description"
+        ></quill-editor>
+      </div>
+
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="quantity"
+          name="quantity"
+          required
+          [(ngModel)]="product.quantity"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="price"
+          name="price"
+          required
+          [(ngModel)]="product.price"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="discountedPrice" class="form-label"
+          >Discounted Price:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="discountedPrice"
+          name="discountedPrice"
+          [(ngModel)]="product.discountedPrice"
+        />
+      </div>
+
+      <div class="mb-3 form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="live"
+          name="live"
+          [(ngModel)]="product.live"
+        />
+        <label class="form-check-label" for="live">Live</label>
+      </div>
+
+      <div class="mb-3 form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="stock"
+          name="stock"
+          [(ngModel)]="product.stock"
+        />
+        <label class="form-check-label" for="stock">Stock</label>
+      </div>
+
+      <!-- category select box -->
+      <div class="mb-3">
+        <label for="categories" class="form-label">Categories:</label>
+        <select
+          class="form-select"
+          id="categories"
+          name="categories"
+          [(ngModel)]="product.category"
+          required
+          [compareWith]="compareFn"
+        >
+          <option
+            [ngValue]="{
+              title: '',
+              description: '',
+              coverImage: '',
+              categoryId: ''
+            }"
+            disabled
+            selected
+          >
+            ---select category---
+          </option>
+          <option [ngValue]="cat" *ngFor="let cat of categories">
+            {{ cat.title }}
+          </option>
+        </select>
+      </div>
+
+      <!-- product image -->
+
+      <div class="mb-3">
+        <label for="productImage" class="form-label">Product Image:</label>
+        <div class="text-center my-3" *ngIf="imageData.file">
+          <img
+            style="height: 250px; width: auto"
+            [src]="imageData.previewImageUrl"
+            alt="preview product image"
+          />
+        </div>
+        <input
+          type="file"
+          class="form-control"
+          id="productImage"
+          name="productImage"
+          accept="image/*"
+          required
+          (change)="imageFieldChanged($event)"
+        />
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Add Product</button>
+        <button type="reset" class="btn btn-secondary ms-2">Clear Form</button>
+      </div>
+    </form>
+  </div>
+</div>

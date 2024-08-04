@@ -1,0 +1,9 @@
+.img{
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  /* border: 1px solid yellow; */
+  border-radius: 100%;
+  object-fit: contain;
+  border: 1px solid   gray;
+}

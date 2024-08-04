@@ -1,0 +1,11 @@
+   /* Add custom CSS styles here */
+   .product-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.product-card img {
+    width:  100%;
+}
+

@@ -1,0 +1,148 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-md-6 offset-md-3">
+      <!-- {{ user | json }} -->
+
+      <div class="card border rounded shadow-sm">
+        <div class="card-body">
+          <div class="m-2 text-center">
+            <img
+              style="width: 220px"
+              class="img-fluid"
+              src="/assets/images/login_vector.svg"
+              alt=""
+            />
+          </div>
+          <h3 class="text-center">Signup here</h3>
+          <form
+            novalidate
+            #signupForm="ngForm"
+            action="#!"
+            (ngSubmit)="formSubmit($event, signupForm)"
+          >
+            <div
+              class="mb-3 alert alert-danger"
+              [hidden]="signupForm.valid || !signupForm.touched"
+            >
+              Form is not valid !!
+            </div>
+
+            <!-- name field  -->
+            <div class="mb-3">
+              <label for="name">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter here"
+                id="name"
+                name="name"
+                [(ngModel)]="user.name"
+                required="true"
+                #nameField="ngModel"
+              />
+
+              <span
+                [hidden]="nameField.valid || !nameField.touched"
+                class="text-danger mt-2 mx-2"
+                >Name is required !!</span
+              >
+            </div>
+            <!-- email field  -->
+            <div class="mb-3">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Enter here"
+                id="email"
+                [(ngModel)]="user.email"
+                name="email"
+              />
+            </div>
+            <!-- password field  -->
+            <div class="mb-3">
+              <label for="password">New Password</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Enter here"
+                id="password"
+                [(ngModel)]="user.password"
+                name="password"
+              />
+            </div>
+
+            <!-- gender button  -->
+            <div class="mb-3">
+              <label for="" class="d-block">Gender</label>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gender"
+                  id="gender"
+                  [value]="'male'"
+                  [(ngModel)]="user.gender"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Male
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gender"
+                  id="gender"
+                  [value]="'female'"
+                  [(ngModel)]="user.gender"
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Female
+                </label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="about">Write about yourself</label>
+              <textarea
+                name="about"
+                id="about"
+                rows="5"
+                class="form-control"
+                [(ngModel)]="user.about"
+              ></textarea>
+            </div>
+
+            <div class="text-center mb-3">
+              Already have account
+              <a href="" [routerLink]="['/login']"> Click here</a>
+            </div>
+
+            <div class="mb-3 text-center">
+              <button
+                [disabled]="loading"
+                type="submit"
+                class="btn btn-success btn-sm"
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  aria-hidden="true"
+                  *ngIf="loading"
+                ></span>
+                <span class="" *ngIf="!loading">Register</span>
+                <span class="ms-2" *ngIf="loading">Please wait...</span>
+              </button>
+              <button
+                type="button"
+                (click)="resetForm(signupForm)"
+                class="btn ms-2 btn-danger btn-sm"
+              >
+                Reset
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

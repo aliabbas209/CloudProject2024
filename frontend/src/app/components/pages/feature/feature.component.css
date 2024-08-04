@@ -1,0 +1,8 @@
+.card{
+    text-align: center;
+}
+
+.card:hover{
+    background-color: antiquewhite;
+    cursor: pointer;
+}

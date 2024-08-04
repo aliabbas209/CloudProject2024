@@ -1,0 +1,32 @@
+<div class="admin-layout">
+  <div class="sidebar d-flex flex-column justify-content-between bg-dark pt-3">
+    <!-- <h3 class="text-white px-2 text-center">Welcome</h3> -->
+    <ul class="nav flex-column">
+      <li class="nav-item" *ngFor="let m of adminMenus">
+        <a
+          href="#!"
+          class="nav-link text-white"
+          [routerLink]="[m.link]"
+          routerLinkActive="active"
+        >
+          <i-tabler [name]="m.icon"></i-tabler>
+          <span class="ms-1"> {{ m.title }}</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="nav flex-column" style="margin-bottom: 80px">
+      <li class="nav-item">
+        <a href="#!" class="nav-link text-white">
+          <i-tabler [name]="'truck-return'"></i-tabler>
+          <span class="ms-1"> Feedback</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="content px-2 py-2">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

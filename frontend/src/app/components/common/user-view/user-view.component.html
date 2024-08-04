@@ -1,0 +1,58 @@
+<div class="card" *ngIf="user">
+  <div class="card-header">User Information</div>
+  <div class="card-body">
+    <div class="img-container text-center">
+      <img
+        class="img"
+        [src]="userService.getUserImageUrl(user.userId)"
+        onerror="this.src='https://pro2-bar-s3-cdn-cf.myportfolio.com/8ee9e0df6a57e6cb08ce8298364354c5/b4dd1698f1d995ddf6dc1caf45e69d0b5550752716af226bf5b6e140d0a48ae6175a3d2b28d2d24e_car_1x1.jpg?h=2f9a2d1908efc225350ee82423d2d7b5&url=aHR0cHM6Ly9taXItczMtY2RuLWNmLmJlaGFuY2UubmV0L3Byb2plY3RzL29yaWdpbmFsLzE5Yjg3YTI5Mjc0MzkzLjU1ZWFkMmU3MWFhNDMuanBn'"
+        alt=""
+      />
+    </div>
+
+    <h3 class="text-center my-2">{{ user.name | uppercase }}</h3>
+    <div class="table-responsive mt-5">
+      <table class="table table-bordered table-hover text-center">
+        <tbody>
+          <tr>
+            <td class="fw-bold">USER ID</td>
+            <td>{{ user.userId }}</td>
+          </tr>
+          <tr>
+            <td class="fw-bold">NAME</td>
+            <td>{{ user.name }}</td>
+          </tr>
+          <tr>
+            <td class="fw-bold">EMAIL</td>
+            <td>{{ user.email }}</td>
+          </tr>
+          <tr>
+            <td class="fw-bold">GENDER</td>
+            <td>{{ user.gender }}</td>
+          </tr>
+          <tr>
+            <td class="fw-bold">ABOUT</td>
+            <td>
+              {{ user.about }}
+            </td>
+          </tr>
+          <tr>
+            <td class="fw-bold">ROLE</td>
+            <td>
+              <span *ngFor="let role of user.roles">
+                <span
+                  class="badge rounded-pill ms-2"
+                  [ngClass]="{
+                    'text-bg-primary': role.roleName == 'ROLE_NORMAL',
+                    'text-bg-success': role.roleName == 'ROLE_ADMIN'
+                  }"
+                  >{{ role.roleName }}</span
+                >
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
