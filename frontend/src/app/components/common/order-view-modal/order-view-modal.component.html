@@ -166,21 +166,20 @@
       >
         {{ updateState ? "View Detail" : "Update Order" }}
       </button>
-      <button
-        (click)="payForOrder(order)"
-        *ngIf="order?.paymentStatus != paymentStatus.PAID"
-        type="button"
-        class="btn btn-success mx-2"
-      >
-        Pay Now
-      </button>
+      
+      <div style="text-align:center;">
+        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+      </div>
+
       <button
         type="button"
-        class="btn btn-outline-dark mx-2"
+        class="btn btn-lg btn btn-outline-dark w-100"
         (click)="modal.close('Save click')"
       >
         Close
       </button>
+      
+      
     </div>
   </div>
 </ng-template>

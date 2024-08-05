@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -65,6 +66,8 @@ import { OrderViewModalComponent } from './components/common/order-view-modal/or
 import { OrderHubComponent } from './components/common/order-hub/order-hub.component';
 import { MyOrdersComponent } from './components/pages/my-orders/my-orders.component';
 import { PaymentComponent } from './components/common/payment/payment.component';
+
+
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
@@ -136,6 +139,7 @@ const icons = {
     NgChartsModule,
     BrowserModule,
     AppRoutingModule,
+    NgxPayPalModule,
     BrowserAnimationsModule,
     NgbModule,
     ToastrModule.forRoot({

@@ -6,6 +6,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import {
+  IPayPalConfig,
+  ICreateOrderRequest 
+} from 'ngx-paypal';
 
 import {
   ModalDismissReasons,
@@ -34,8 +38,12 @@ export class OrderViewModalComponent implements OnInit, OnDestroy {
   public paymentStatus = PaymentStatus;
   public modalSubscription?: Subscription;
   updateState = false;
+  public payPalConfig ? : IPayPalConfig;
 
   closeResult: any;
+  showSuccess: boolean | undefined;
+  showCancel: boolean | undefined;
+  showError: boolean | undefined;
   constructor(
     private modalService: NgbModal,
     private _helper: HelperService,
@@ -58,6 +66,7 @@ export class OrderViewModalComponent implements OnInit, OnDestroy {
         this.open(this.content);
       },
     });
+    this.initConfig();
   }
   ngOnDestroy(): void {
     console.log('unsubcribing');
@@ -162,4 +171,70 @@ export class OrderViewModalComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  private initConfig(): void {
+    this.payPalConfig = {
+        currency: 'EUR',
+        clientId: '',
+        createOrderOnClient: (data) => < ICreateOrderRequest > {
+            intent: 'CAPTURE',
+            purchase_units: [{
+                amount: {
+                    currency_code: 'EUR',
+                    value: '9.99',
+                    breakdown: {
+                        item_total: {
+                            currency_code: 'EUR',
+                            value: '9.99'
+                        }
+                    }
+                },
+                items: [{
+                    name: 'Enterprise Subscription',
+                    quantity: '1',
+                    category: 'DIGITAL_GOODS',
+                    unit_amount: {
+                        currency_code: 'EUR',
+                        value: '9.99',
+                    },
+                }]
+            }]
+        },
+        advanced: {
+            commit: 'true'
+        },
+        style: {
+            label: 'paypal',
+            layout: 'vertical'
+        },
+        onApprove: (data, actions) => {
+            console.log('onApprove - transaction was approved, but not authorized', data, actions);
+            actions.order.get().then((details: any) => {
+                console.log('onApprove - you can get full order details inside onApprove: ', details);
+            });
+
+        },
+        onClientAuthorization: (data) => {
+            console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+            this.showSuccess = true;
+        },
+        onCancel: (data, actions) => {
+            console.log('OnCancel', data, actions);
+            this.showCancel = true;
+
+        },
+        onError: err => {
+            console.log('OnError', err);
+            this.showError = true;
+        },
+        onClick: (data, actions) => {
+            console.log('onClick', data, actions);
+           //this.resetStatus();
+        }
+    };
+}
+  resetStatus() {
+    throw new Error('Method not implemented.');
+  }
+  
 }

@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://cloudtestgroup-a8fqf7b7hpfebnga.germanywestcentral-01.azurewebsites.net',
+  apiUrl: '',
   paymentKey: 23525,
   // production configurations
   ROLE_NORMAL_ID: 'awgfasfwsdqtgasfwqgsdtg',
